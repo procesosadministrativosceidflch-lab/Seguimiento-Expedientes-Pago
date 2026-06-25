@@ -15,7 +15,7 @@ credenciales = json.loads(
     os.getenv("GOOGLE_CREDENTIALS")
 )
 
-credentials = Credentials.from_service_account_file(
+credentials = Credentials.from_service_account_info(
     credenciales,
     scopes=SCOPES
 )
