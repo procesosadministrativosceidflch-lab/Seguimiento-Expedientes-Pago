@@ -84,6 +84,12 @@ class SyncLog(Base):
         nullable=False
     )
 
+    cantidad_docentes = Column(
+        Integer,
+        nullable=False,
+        default=0
+    )
+
     hojas = Column(
         Integer,
         nullable=False

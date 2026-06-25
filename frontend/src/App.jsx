@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import SearchForm from "./components/SearchForm"
 import ResultadoCard from "./components/ResultadoCard"
 import UltimaActualizacion from "./components/UltimaActualizacion";
+import Informacion from "./components/Informacion";
 import api from "./services/api"
 
 
@@ -16,13 +17,23 @@ function App(){
         
         async function cargarPeriodos() {
             
-            const response = await api.get(
-                "/periodos"
-            );
-            
-            setPeriodos(
-                response.data
-            );
+            try {
+                const response = await api.get(
+                    "/periodos"
+                );
+
+                const data = response?.data;
+                const listaPeriodos = Array.isArray(data)
+                    ? data
+                    : Array.isArray(data?.periodos)
+                        ? data.periodos
+                        : [];
+                
+                setPeriodos(listaPeriodos);
+            } catch (error) {
+                console.error("Error cargando periodos", error);
+                setPeriodos([]);
+            }
     
         }
     
@@ -90,6 +101,8 @@ function App(){
                 />
 
             )}
+
+            <Informacion />
 
         </div>
 

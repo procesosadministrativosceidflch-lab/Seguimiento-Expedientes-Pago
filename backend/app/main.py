@@ -5,19 +5,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, get_db
 from app.models import Base, SyncLog
 from app.models import Docente
-from app.services.sheets_service import (obtener_base_docentes, obtener_hojas_pago)
-from app.crud import (guardar_docentes)
+from app.services.sheets_service import (obtener_hojas_pago)
 
 from app.services.services import (
     calcular_pago_estimado,
     obtener_estado,
     construir_timeline
 )
-
-from app.services.sync_service import (
-    ejecutar_sincronizacion
-)
-
 
 Base.metadata.create_all(bind=engine)
 
@@ -45,34 +39,6 @@ def inicio():
 
     return {
         "mensaje":"API funcionando"
-    }
-
-
-@app.get("/sincronizar-docentes")
-def sincronizar_docentes(
-    db: Session = Depends(get_db)
-):
-
-    datos = obtener_base_docentes()
-
-    guardar_docentes(
-        db,
-        datos
-    )
-
-    return {
-        "mensaje":"Docentes sincronizados"
-    }
-
-@app.get("/sincronizar-expedientes")
-def sincronizar(db: Session = Depends(get_db)):
-
-    resultado = ejecutar_sincronizacion(db)
-
-    return {
-        "mensaje":
-        "Expedientes sincronizados",
-        **resultado
     }
 
 @app.get("/periodos")

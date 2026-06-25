@@ -1,6 +1,8 @@
 function SearchForm({ruc, setRuc, periodo, setPeriodo, periodos, onSearch}) {    
 
 
+    console.log("Periodos recibidos:", periodos);
+    
     const submit=(e)=>{
 
         e.preventDefault()
