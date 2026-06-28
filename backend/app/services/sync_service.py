@@ -6,10 +6,13 @@ from zoneinfo import ZoneInfo
 
 LIMA = ZoneInfo("America/Lima")
 
+def ahora():
+    return datetime.now(LIMA)
+
 
 def ejecutar_sincronizacion(db):
 
-    inicio = datetime.now(LIMA)
+    inicio = ahora()
 
     try:
 
@@ -31,7 +34,7 @@ def ejecutar_sincronizacion(db):
 
         log = SyncLog(
             fecha_inicio=inicio,
-            fecha_fin=datetime.now(LIMA),
+            fecha_fin=ahora(),
             cantidad_docentes = len(docentes),
             hojas=len(hojas),
             registros=total,
@@ -60,7 +63,7 @@ def ejecutar_sincronizacion(db):
 
             fecha_inicio=inicio,
 
-            fecha_fin=datetime.now(),
+            fecha_fin=ahora(),
 
             hojas=0,
 

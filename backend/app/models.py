@@ -75,12 +75,12 @@ class SyncLog(Base):
     )
 
     fecha_inicio = Column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
 
     fecha_fin = Column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
 
