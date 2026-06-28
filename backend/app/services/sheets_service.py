@@ -8,17 +8,23 @@ from google.oauth2.service_account import Credentials
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/spreadsheets.readonly"
 ]
 
-credenciales = json.loads(
-    os.getenv("GOOGLE_CREDENTIALS")
-)
+google_credentials = os.getenv("GOOGLE_CREDENTIALS")
 
-credentials = Credentials.from_service_account_info(
-    credenciales,
-    scopes=SCOPES
-)
+
+if google_credentials and google_credentials.strip().startswith("{"):
+    credentials = Credentials.from_service_account_info(
+        json.loads(google_credentials),
+        scopes=SCOPES
+    )
+else:
+    credentials = Credentials.from_service_account_file(
+        "credentials.json",
+        scopes=SCOPES
+    )
 
 client = gspread.authorize(credentials)
 

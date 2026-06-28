@@ -1,3 +1,4 @@
+import sys
 from app.database import SessionLocal
 from app.services.sync_service import (
     ejecutar_sincronizacion
@@ -19,12 +20,14 @@ def main():
             f"{resultado['registros']} registros "
             f"en {resultado['hojas']} hojas"
         )
+        sys.exit(0)
 
     except Exception as e:
 
         print(
             f"Error durante la sincronización: {e}"
         )
+        sys.exit(1)
 
         raise
 
