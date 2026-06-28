@@ -2,11 +2,7 @@ name: Sincronizar Expedientes
 
 on:
   schedule:
-    # 10:00 AM Perú (UTC-5 = 15:00 UTC)
-    - cron: '0 15 * * *'
-
-    # 06:00 PM Perú (UTC-5 = 23:00 UTC)
-    - cron: '0 23 * * *'
+    - cron: "*/5 * * * *"
 
   workflow_dispatch:
 
