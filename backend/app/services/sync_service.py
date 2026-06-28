@@ -2,11 +2,14 @@ from app.services.sheets_service import (obtener_base_docentes, obtener_hojas_pa
 from app.crud import (guardar_docentes, guardar_expedientes)
 from app.models import SyncLog
 from datetime import datetime
+from zoneinfo import ZoneInfo
+
+LIMA = ZoneInfo("America/Lima")
 
 
 def ejecutar_sincronizacion(db):
 
-    inicio = datetime.now()
+    inicio = datetime.now(LIMA)
 
     try:
 
@@ -28,7 +31,7 @@ def ejecutar_sincronizacion(db):
 
         log = SyncLog(
             fecha_inicio=inicio,
-            fecha_fin=datetime.now(),
+            fecha_fin=datetime.now(LIMA),
             cantidad_docentes = len(docentes),
             hojas=len(hojas),
             registros=total,
