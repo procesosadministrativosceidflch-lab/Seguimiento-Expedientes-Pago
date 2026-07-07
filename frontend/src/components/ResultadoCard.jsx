@@ -77,7 +77,7 @@ function ResultadoCard({ datos }) {
                             exp.estado_actual === 5 &&
                             exp.fecha_estimada_pago && (
                                 <p className="fecha">
-                                Fecha probable: {exp.fecha_estimada_pago}
+                                Fecha probable de pago: {exp.fecha_estimada_pago}
                                 </p>
                             )
                         }
